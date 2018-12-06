@@ -10,6 +10,8 @@
 
 #include "c_exchange.h" /* This is added so we can post back to C++ */
 
+#include <windows.h> /* to use sleep function */
+
 
 
 #ifndef  uns32              /*  Version 1.0a 1998-05-19  source availible     */
@@ -639,13 +641,24 @@ fprintf(stdout, "%.12lf  %.12lf\n",sum,(sum-(log(log((double)stop))+0.5772156649
 return  anz;
 }
 
-
+void process_something() {
+  int x = 1;
+  for (int i = 1 ; i < 2000000000 ; i++) {
+    x = x * (i / 2);
+  }
+  printf("counter: %i \n", x);
+}
 
 int generate_primes(int under, void * out) {
   char * name = "primes";
   char param [50];
   sprintf(param, "%d", under);
   char * values[] = { name, param};
+  Sleep(10000);
+  printf("after pause...");
+  process_something();
+  process_something();
+  process_something();
   do_primesieve(2, values, out);
 
 }
